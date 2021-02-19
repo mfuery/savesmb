@@ -1,34 +1,4 @@
 import React, { Component } from "react"
-import "./PaymentForm.css"
-
-const styles = {
-  name: {
-    verticalAlign: "top",
-    display: "none",
-    margin: 0,
-    border: "none",
-    fontSize: "16px",
-    fontFamily: "Helvetica Neue",
-    padding: "16px",
-    color: "#373F4A",
-    backgroundColor: "transparent",
-    lineHeight: "1.15em",
-    placeholderColor: "#000",
-    _webkitFontSmoothing: "antialiased",
-    _mozOsxFontSmoothing: "grayscale",
-  },
-  leftCenter: {
-    float: "left",
-    textAlign: "center",
-  },
-  blockRight: {
-    display: "block",
-    float: "right",
-  },
-  center: {
-    textAlign: "center",
-  },
-}
 
 export const loadSquareSdk = () => {
   return new Promise((resolve, reject) => {
@@ -74,28 +44,6 @@ export default class PaymentForm extends Component {
         process.env.SQUARE_LOCATION_ID || "MISSING SQUARE_LOCATION_ID",
       inputClass: "sq-input",
       autoBuild: false,
-      inputStyles: [
-        {
-          fontSize: "16px",
-          fontFamily: "Helvetica Neue",
-          padding: "16px",
-          color: "#373F4A",
-          backgroundColor: "transparent",
-          lineHeight: "1.15em",
-          placeholderColor: "#000",
-          _webkitFontSmoothing: "antialiased",
-          _mozOsxFontSmoothing: "grayscale",
-        },
-      ],
-      applePay: {
-        elementId: "sq-apple-pay",
-      },
-      masterpass: {
-        elementId: "sq-masterpass",
-      },
-      googlePay: {
-        elementId: "sq-google-pay",
-      },
       cardNumber: {
         elementId: "sq-card-number",
         placeholder: "• • • •  • • • •  • • • •  • • • •",
@@ -167,39 +115,6 @@ export default class PaymentForm extends Component {
           console.log(nonce)
         },
         unsupportedBrowserDetected: () => {},
-        inputEventReceived: (inputEvent) => {
-          switch (inputEvent.eventType) {
-            case "focusClassAdded":
-              break
-            case "focusClassRemoved":
-              break
-            case "errorClassAdded":
-              document.getElementById("error").innerHTML =
-                "Please fix card information errors before continuing."
-              break
-            case "errorClassRemoved":
-              document.getElementById("error").style.display = "none"
-              break
-            case "cardBrandChanged":
-              if (inputEvent.cardBrand !== "unknown") {
-                this.setState({
-                  cardBrand: inputEvent.cardBrand,
-                })
-              } else {
-                this.setState({
-                  cardBrand: "",
-                })
-              }
-              break
-            case "postalCodeChanged":
-              break
-            default:
-              break
-          }
-        },
-        paymentFormLoaded: function () {
-          document.getElementById("name").style.display = "inline-flex"
-        },
       },
     }
 
@@ -216,71 +131,29 @@ export default class PaymentForm extends Component {
 
   render() {
     return (
-      <div className="cc-container">
-        <div id="form-container">
-          <div id="sq-walletbox">
-            <button
-              style={{ display: this.state.applePay ? "inherit" : "none" }}
-              className="wallet-button"
-              id="sq-apple-pay"
-            />
-            <button
-              style={{ display: this.state.masterpass ? "block" : "none" }}
-              className="wallet-button"
-              id="sq-masterpass"
-            />
-            <button
-              style={{ display: this.state.googlePay ? "inherit" : "none" }}
-              className="wallet-button"
-              id="sq-google-pay"
-            />
-            <hr />
-          </div>
-
-          <div id="sq-ccbox">
-            <p>
-              <span style={styles.leftCenter}>Enter Card Info Below </span>
-              <span style={styles.blockRight}>
-                {this.state.cardBrand.toUpperCase()}
-              </span>
-            </p>
-            <div id="cc-field-wrapper">
-              <label>
-                Card Number
-                <div id="sq-card-number" />
-              </label>
-              <input type="hidden" id="card-nonce" name="nonce" />
-              <label>
-                Expiration Date
-                <div id="sq-expiration-date" />
-              </label>
-              <label>
-                CVV
-                <div id="sq-cvv" />
-              </label>
-            </div>
-            <label>
-              Name
-              <input
-                id="name"
-                style={styles.name}
-                type="text"
-                placeholder="Name"
-              />
-            </label>
-            <label>
-              Postal Code
-              <div id="sq-postal-code" />
-            </label>
-          </div>
+      <div id="form-container">
+        <div className="field">
+          <label className="label">Card Number</label>
+          <div id="sq-card-number" className="control"></div>
+        </div>
+        <div className="field">
+          <div className="third" id="sq-expiration-date"></div>
+        </div>
+        <div className="field">
+          <div className="third" id="sq-cvv"></div>
+        </div>
+        <div className="field">
+          <div className="third" id="sq-postal-code"></div>
+        </div>
+        <div className="field">
           <button
+            id="sq-creditcard"
             className="button-credit-card"
-            onClick={this.requestCardNonce}
+            onClick={this.onGetCardNonce}
           >
-            Pay
+            Pay $1.00
           </button>
         </div>
-        <p style={styles.center} id="error" />
       </div>
     )
   }

@@ -42,7 +42,7 @@ const DonatePageTemplate = ({
                   Your transaction is secure and 100% of the funds will go
                   directly to the owner to help sustain their business.
                 </p>
-                <PaymentForm paymentForm={window.SqPaymentForm}></PaymentForm>
+                <PaymentForm></PaymentForm>
               </div>
             </div>
           </div>
