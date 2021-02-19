@@ -8,7 +8,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO/SEO"
 import Content, { HTMLContent } from "../components/Content"
 import { FormattedMessage } from "react-intl"
-import DonateForm from "../components/DonateForm"
+import PaymentForm from "../components/PaymentForm"
 
 const DonatePageTemplate = ({
   title,
@@ -26,7 +26,26 @@ const DonatePageTemplate = ({
     <div className="container content donate">
       <div className="padded-width-container">
         <section className="section">
-          <DonateForm></DonateForm>
+          <div className="rows is-multiline donate-form">
+            <div className="row">
+              <h1>Support And Make A Difference</h1>
+              <p className="subtitle">
+                100% of your donation will support the merchant toward their
+                operating costs.{" "}
+              </p>
+              <div className="donate-step-1">
+                <h3>Step 1: Select Donation Amount</h3>
+              </div>
+              <div className="row donate-step-2">
+                <h3>Step 2: Enter Payment Information</h3>
+                <p>
+                  Your transaction is secure and 100% of the funds will go
+                  directly to the owner to help sustain their business.
+                </p>
+                <PaymentForm paymentForm={window.SqPaymentForm}></PaymentForm>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
       <section className="section">
