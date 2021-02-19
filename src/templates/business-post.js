@@ -278,7 +278,7 @@ const BusinessPost = ({ data, location }) => {
       jsonData={jsonData}
       location={location}
     >
-      <SEO frontmatter={post.frontmatter} postImage={image} isBlogPost />
+      <SEO frontmatter={post.frontmatter} postImage={image} isBusinessPost />
       <BusinessPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
