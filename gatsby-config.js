@@ -3,27 +3,18 @@ const languages = require("./src/data/languages")
 module.exports = {
   siteMetadata: {
     title: `Local Allies`,
-    description: `
-  This is a blog theme. The description will be showed in SEO results on pages
-  without their own descriptions.
-`,
+    description: `Providing Sustainable Help for Our Local Small Businesses`,
     siteUrl: process.env.siteUrl || "https://www.localallies.org",
-    image: "img.jpg",
-    author: {
-      name: "Local Allies",
-      minibio: `
-        This bio is shown at the bottom of each blog post. It supports
-        <strong>custom HTML</strong> if you’re into that sort of thing.
-      `,
-    },
+    image: `${__dirname}/src/img/logo.png`,
     organization: {
       name: "Local Allies",
       url: process.env.siteUrl || "https://www.localallies.org",
-      logo: "img/logo.svg",
+      logo: `${__dirname}/src/img/logo.png`,
     },
     social: {
-      twitter: "@twitter",
+      twitter: "@LocalAllies",
       fbAppID: "",
+      instagram: "@LocalAllies",
     },
     languages,
   },
@@ -129,8 +120,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Local Allies`,
-        short_name: `Local Allies`,
+        name: `LocAllies`,
+        short_name: `LocAllies`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#397A4C`,
@@ -166,7 +157,6 @@ module.exports = {
         cookieDomain: "localallies.org",
       },
     },
-    `gatsby-plugin-square-payment-form`,
     {
       resolve: "gatsby-plugin-react-leaflet",
       options: {
